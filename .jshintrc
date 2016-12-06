@@ -1,0 +1,20 @@
+{
+  "globals": {
+    "describe": true,
+    "it": true,
+    "module": true,
+    "require": true
+  },
+
+  "asi": true,
+  "esnext": true,
+  "browser": true,
+  "curly": true,
+  "eqeqeq": true,
+  "forin": false,
+  "onevar": true,
+  "trailing": true,
+  "undef" : true,
+  "unused": true,
+  "supernew": true
+}

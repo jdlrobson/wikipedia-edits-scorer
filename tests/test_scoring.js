@@ -118,4 +118,14 @@ describe('calcScore', function() {
       ) === -1
     );
   });
+
+  it('Joshua Bonehill-Paine is trending more than Artificial Kidney', function() {
+    assert.ok( calcScore(examples.JoshuaBonehillPaine, 1.5) > calcScore(examples.ArtificialKidney, 1.5),
+      'Joshua Bonehill-Paine has more editors');
+  });
+
+  it('Employee Scheduling is trending less than Artificial Kidney', function() {
+    assert.ok( calcScore(examples.EmployeeScheduling, 1.5) <= calcScore(examples.ArtificialKidney, 1.5),
+      'We also check if they are the same as they are equally boring :)');
+  });
 });

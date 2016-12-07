@@ -61,7 +61,7 @@ function calculateScore(date, edits, hrs) {
   var visitScore = views > 0 ? views : 0;
   var namedEdits = edits.edits - anonEdits - ( reverts / 2 );
   var editScore = ( ( -4 * flagged ) + namedEdits + ( anonEdits * 0.2 ) );
-  var contributionScore = ( numContributors / 2 );
+  var contributionScore = ( numContributors - 3 ) / 2;
 
   if ( views > 0 && hrs < 84 ) {
     visitScore = -visitScore;

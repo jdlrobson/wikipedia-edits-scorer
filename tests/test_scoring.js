@@ -100,4 +100,22 @@ describe('calcScore', function() {
   it('Oakland fire is trending more than TLC', function() {
     assert.ok( calcScore(examples.OaklandWarehouse, 72) > calcScore(examples.TLC, 72));
   });
+
+  it('Everything but edits and contributors are optional', function() {
+    assert.ok(
+      isFinite( scorer.calculateScore( new Date(), examples.minimal, 72 ) )
+    );
+  });
+
+  it('Something where zero bytes have changed scores -1', function() {
+    assert.ok(
+      scorer.calculateScore(
+        new Date(),
+        Object.assign( {}, examples.minimal, {
+          bytesChanged: 0
+        } ),
+        72
+      ) === -1
+    );
+  });
 });

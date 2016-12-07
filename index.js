@@ -47,28 +47,39 @@ function getBias( editors ) {
  * @param {Integer} period of time in hours to evaluate
  */
 function calculateScore(date, edits, hrs) {
-  var start = typeof edits.start === 'string' ? new Date( edits.start ) : start;
+  var start = typeof edits.start === 'string' ? new Date( edits.start ) : edits.start;
   var age = ( date - start ) / 1000 / 60;
+  var anonEdits = edits.anonEdits || 0;
+  var reverts = edits.reverts || 0;
+  var views = edits.views || 0;
+  var flagged = edits.flaggedEdits || 0;
+  var bytes = edits.bytesChanged;
+  // Maybe this should
+  var numContributors = edits.numberContributors || 1;
 
   var exponential = Math.pow(0.5, age / ( hrs * 60 ));
-  var visitScore = edits.views > 0 ? edits.views : 0;
-  var namedEdits = edits.edits - edits.anonEdits - ( edits.reverts / 2 );
-  var editScore = ( ( -4 * edits.flaggedEdits ) + namedEdits + ( edits.anonEdits * 0.2 ) );
-  var numContributors = edits.numberContributors;
-  var byteScore = edits.bytesChanged / ( edits.edits / numContributors );
-  if (byteScore < 0) {
-    byteScore = -byteScore;
-  }
+  var visitScore = views > 0 ? views : 0;
+  var namedEdits = edits.edits - anonEdits - ( reverts / 2 );
+  var editScore = ( ( -4 * flagged ) + namedEdits + ( anonEdits * 0.2 ) );
   var contributionScore = ( numContributors / 2 );
 
-  if ( edits.views > 0 && hrs < 84 ) {
+  if ( views > 0 && hrs < 84 ) {
     visitScore = -visitScore;
   }
-  var bias = getBias(edits.distribution);
 
   var score = contributionScore * ( visitScore + editScore ) * exponential;
-  score *= byteScore;
+  if ( bytes !== undefined ) {
+    var byteScore = bytes / ( edits.edits / numContributors );
+    if (bytes && byteScore < 0) {
+      byteScore = -byteScore;
+    }
+    score *= byteScore;
+    if ( bytes === 0 ) {
+      return -1;
+    }
+  }
 
+  var bias = getBias(edits.distribution);
   if ( bias > 0 ) {
     score *= ( 1 - bias );
   }

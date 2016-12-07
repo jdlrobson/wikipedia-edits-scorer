@@ -63,4 +63,17 @@ describe('calcScore', function() {
   it('Negative bytes is not a bad thing and results in a positive score.', function() {
     assert.ok( calcScore(examples.PeteBurns2, 84) > 0);
   });
+
+  it('RashaanSalaam has a score over zero.', function() {
+    assert.ok( calcScore(examples.RashaanSalaam, 1) > 0);
+  });
+
+  it('Women (BBC) has a score over zero despite one prolific editor.', function() {
+    assert.ok( scorer.getBias(examples.Women.distribution) > 0, 'It has one prolific editor but lots of editors.');
+    assert.ok( calcScore(examples.Women, 1) > 0, 'Score should thus be greater than zero');
+  });
+
+  it('Women (BBC) is trending more than RashaanSalaam over the course of the day', function() {
+    assert.ok( calcScore(examples.RashaanSalaam, 24) < calcScore(examples.Women, 24));
+  });
 });

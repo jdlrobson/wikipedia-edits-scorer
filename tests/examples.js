@@ -191,7 +191,14 @@ const PierrepontPlace = Page.fromJSON({"title":"Pierrepont Place, Bath","edits":
 
 const DearZindagi = Page.fromJSON({"title":"Dear Zindagi","edits":16,"anonEdits":8,"isNew":false,"notabilityFlags":0,"volatileFlags":0,"reverts":0,"start":"2016-11-25T21:59:28.649Z","updated":"2016-11-26T01:15:25.122Z","contributors":["M.Billoo2000"],"anons":["79.79.162.167","65.95.201.108","2605:6000:E88B:3D00:B5EC:B03B:74B5:BB22"],"distribution":{"79.79.162.167":4,"M.Billoo2000":4,"65.95.201.108":4,"2605:6000:E88B:3D00:B5EC:B03B:74B5:BB22":4},"bytesChanged":308,"id":"Dear Zindagi","wiki":"enwiki","views":0,"score":null,"lang":"en","safe":true,"bias":0,"lastIndex":1,"index":1,"description":"2016 film by Gauri Shinde"});
 
+const RashaanSalaam = Page.fromJSON({"title":"Rashaan Salaam","edits":11,"anonEdits":7,"isNew":false,"notabilityFlags":0,"volatileFlags":0,"reverts":0,"start":"2016-12-06T20:08:22.418Z","updated":"2016-12-06T20:38:08.376Z","contributors":["Fenway617","UW1941","Skycycle"],"anons":["144.183.224.2","129.120.178.53","204.154.151.242","132.194.33.28","67.162.152.199"],"distribution":{"144.183.224.2":1,"Fenway617":1,"129.120.178.53":1,"204.154.151.242":3,"UW1941":2,"132.194.33.28":1,"Skycycle":1,"67.162.152.199":1},"bytesChanged":96,"id":"Rashaan Salaam","wiki":"enwiki","views":0,"score":-310.97407783528274,"lang":"en","safe":true,"bias":0.0202020202020202,"lastIndex":51,"index":1,"thumbnail":{"source":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Rashaan_Salaam-Heisman.JPG/120px-Rashaan_Salaam-Heisman.JPG","width":120,"height":90},"description":"All-American college football player, professional football player, running back, Heisman Trophy winner"});
+
+const Women = Page.fromJSON(
+  {"title":"100 Women (BBC)","edits":96,"anonEdits":15,"isNew":false,"notabilityFlags":0,"volatileFlags":1,"reverts":1,"start":"2016-12-06T15:49:37.693Z","updated":"2016-12-06T19:52:27.889Z","contributors":["Mgmcs2","JohnBlackburne","Megalibrarygirl","BrillLyle","Victuallers","Nev1","Shawn in Montreal","SusunW","KrakatoaKatie","Gamaliel"],"anons":["2A00:23C4:A683:6A00:C414:D65C:FA3:A059","2A00:23C5:268E:B100:A067:4C24:AEBE:87E8"],"distribution":{"2A00:23C4:A683:6A00:C414:D65C:FA3:A059":14,"Mgmcs2":1,"JohnBlackburne":1,"Megalibrarygirl":16,"BrillLyle":41,"Victuallers":6,"Nev1":4,"Shawn in Montreal":1,"SusunW":9,"2A00:23C5:268E:B100:A067:4C24:AEBE:87E8":1,"KrakatoaKatie":1,"Gamaliel":2},"bytesChanged":8616,"id":"100 Women (BBC)","wiki":"enwiki","views":0,"score":8.067889074278886e-10,"lang":"en","safe":true,"bias":1,"lastIndex":51,"index":1,"thumbnail":{"source":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Stephanie_harvey_crop.jpg/80px-Stephanie_harvey_crop.jpg","width":80,"height":120},"description":"International award managed by BBC"});
+
 module.exports = {
+  Women: Women,
+  RashaanSalaam: RashaanSalaam,
   agaricAcid: agaricAcid,
   battleMosul: battleMosul,
   deaths2016: deaths2016,

@@ -6,7 +6,7 @@
  * @return {Number} between 0 and 1 where 1 is biased and 0 is not biased
  */
 function getBias( editors ) {
-  var variance,
+  var variance, sd,
     avg = 0,
     totalEdits = 0,
     values = [],
@@ -30,7 +30,8 @@ function getBias( editors ) {
     } );
     // variance
     variance = totalDeviationSquared / values.length;
-    return variance > totalEdits ? 1 : variance / totalEdits;
+    sd = Math.sqrt( variance );
+    return sd / totalEdits;
   }
 }
 /**

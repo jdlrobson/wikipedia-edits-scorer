@@ -76,4 +76,28 @@ describe('calcScore', function() {
   it('Women (BBC) is trending more than RashaanSalaam over the course of the day', function() {
     assert.ok( calcScore(examples.RashaanSalaam, 24) < calcScore(examples.Women, 24));
   });
+
+  it('Italian constitutional referendum is trending more than Jayalalithaa (less reverts)', function() {
+    assert.ok( calcScore(examples.Jayalalithaa, 72) < calcScore(examples.ItalianReferendum, 72));
+  });
+
+  it('OaklandWarehouse is trending more than Jayalalithaa (more edits and editors)', function() {
+    assert.ok( calcScore(examples.Jayalalithaa, 72) < calcScore(examples.OaklandWarehouse, 72));
+  });
+
+  it('but Jayalalithaa is more relevant than the warehouse fire for a week as it has views', function() {
+    assert.ok( calcScore(examples.Jayalalithaa, 84) > calcScore(examples.OaklandWarehouse, 84));
+  });
+
+  it('Oakland fire is trending more than Trump', function() {
+    assert.ok( calcScore(examples.OaklandWarehouse, 72) > calcScore(examples.TrumpNovember, 72));
+  });
+
+  it('Oakland fire is trending more than Deaths in 2016', function() {
+    assert.ok( calcScore(examples.OaklandWarehouse, 72) > calcScore(examples.Deaths2016Nov, 72));
+  });
+
+  it('Oakland fire is trending more than TLC', function() {
+    assert.ok( calcScore(examples.OaklandWarehouse, 72) > calcScore(examples.TLC, 72));
+  });
 });

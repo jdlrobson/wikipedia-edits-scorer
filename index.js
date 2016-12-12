@@ -39,6 +39,7 @@ function getBias( editors ) {
  * @param {Object} edits information
  * @param {Date|String} edit.start when you began recording edit activity
  * @param {Integer} edit.views how many page views a page got in the last 24 hours
+ * @param {Boolean} edit.isNew whether the page is known to be new
  * @param {Integer} edits.edits how many edits a page got (including anonymous and reverts)
  * @param {Integer} edits.anonEdits how many anonymous edits a page got
  * @param {Integer} edits.distribution a mapping of usernames to number of edits they made
@@ -70,13 +71,19 @@ function calculateScore(date, edits, hrs) {
   var score = contributionScore * ( visitScore + editScore ) * exponential;
   if ( bytes !== undefined ) {
     var byteScore = bytes / ( edits.edits / numContributors );
-    if (bytes && byteScore < 0) {
-      byteScore = -byteScore;
+    if (byteScore < 0) {
+      byteScore = 1;
+    } else {
+      byteScore /= 1200;
     }
     score *= byteScore;
     if ( bytes === 0 ) {
       return -1;
     }
+  }
+
+  if ( edits.isNew ) {
+    score *= 4;
   }
 
   var bias = getBias(edits.distribution);

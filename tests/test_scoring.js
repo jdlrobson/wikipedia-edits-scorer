@@ -128,4 +128,9 @@ describe('calcScore', function() {
     assert.ok( calcScore(examples.EmployeeScheduling, 1.5) <= calcScore(examples.ArtificialKidney, 1.5),
       'We also check if they are the same as they are equally boring :)');
   });
+
+  it('Grammys is trending less than PIA', function() {
+    assert.ok( calcScore(examples.Grammys, 84) < calcScore(examples.PIA, 84),
+      'The PIA article is new so could signal a breaking news story.');
+  });
 });

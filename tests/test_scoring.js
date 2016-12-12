@@ -133,4 +133,10 @@ describe('calcScore', function() {
     assert.ok( calcScore(examples.Grammys, 84) < calcScore(examples.PIA, 84),
       'The PIA article is new so could signal a breaking news story.');
   });
+
+  it('UpconvertingNano is trending less than PVaughan', function() {
+    assert.ok( calcScore(examples.UpconvertingNano, 84) < calcScore(examples.PVaughan, 84),
+      'The UpconvertingNano story is new, but there is not enough editors/edits to be notable');
+  });
+  
 });

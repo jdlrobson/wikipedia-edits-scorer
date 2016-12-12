@@ -60,7 +60,8 @@ function calculateScore(date, edits, hrs) {
 
   var exponential = Math.pow(0.5, age / ( hrs * 60 ));
   var visitScore = views > 0 ? views : 0;
-  var namedEdits = edits.edits - anonEdits - ( reverts / 2 );
+  var allEdits = edits.edits;
+  var namedEdits = allEdits - anonEdits - ( reverts / 2 );
   var editScore = ( ( -4 * flagged ) + namedEdits + ( anonEdits * 0.2 ) );
   var contributionScore = ( numContributors - 3 ) / 2;
 
@@ -83,7 +84,7 @@ function calculateScore(date, edits, hrs) {
   }
 
   if ( edits.isNew ) {
-    score *= 4;
+    score *= allEdits / ( age / 30 );
   }
 
   var bias = getBias(edits.distribution);

@@ -90,6 +90,10 @@ function calculateScore(date, edits, hrs) {
     if ( speed > 0.9 && allEdits < 12 ) {
       score = 0;
     }
+  } else {
+    if ( age < 20 && ( allEdits < 10 || namedEdits === 0 ) && anonEdits > 5 ) {
+      score = 0;
+    }
   }
 
   if ( bias > 0 ) {

@@ -2,7 +2,7 @@ var assert = require( 'assert');
 
 const examples = require( './examples')
 const scorer = require( './../')
-
+const postivePushipedia = require( './pushipedia-positives' );
 require("mocha-jshint")();
 
 function calcScore(example, halflife) {
@@ -138,5 +138,23 @@ describe('calcScore', function() {
     assert.ok( calcScore(examples.UpconvertingNano, 84) < calcScore(examples.PVaughan, 84),
       'The UpconvertingNano story is new, but there is not enough editors/edits to be notable');
   });
-  
+
+  it( 'Check pushipedia notifications match with positive scores', function () {
+    postivePushipedia.forEach( function ( example ) {
+      var data = example.data;
+      var score = scorer.calculateScore(new Date(data.trendedAt),
+        {
+          edits: data.edits,
+          anonEdits: data.anonEdits,
+          start: data.start,
+          flaggedEdits: data.isVolatile ? 1 : 0,
+          distribution: data.distribution,
+          reverts: data.reverts,
+          isNew: data.isNew,
+          numberContributors: data.anonAuthors + data.uniqueAuthors
+        }, 1.5);
+      assert.ok( score > 1, example.title + ' has score of ' + score );
+    });
+  });
 });
+

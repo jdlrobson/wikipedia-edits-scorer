@@ -64,6 +64,7 @@ function calculateScore(date, edits, hrs) {
   var namedEdits = allEdits - anonEdits - ( reverts / 2 );
   var editScore = ( ( -4 * flagged ) + namedEdits + ( anonEdits * 0.2 ) );
   var contributionScore = ( numContributors - 3 ) / 2;
+  var speed = allEdits / age;
 
   if ( views > 0 && hrs < 84 ) {
     visitScore = -visitScore;
@@ -83,11 +84,14 @@ function calculateScore(date, edits, hrs) {
     }
   }
 
+  var bias = getBias(edits.distribution);
   if ( edits.isNew ) {
     score *= allEdits / ( age / 30 );
+    if ( speed > 0.9 && allEdits < 12 ) {
+      score = 0;
+    }
   }
 
-  var bias = getBias(edits.distribution);
   if ( bias > 0 ) {
     score *= ( 1 - bias );
   }

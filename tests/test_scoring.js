@@ -2,6 +2,7 @@ var assert = require( 'assert');
 
 const examples = require( './examples')
 const scorer = require( './../')
+const negativePushipedia = require( './pushipedia-negatives' );
 const postivePushipedia = require( './pushipedia-positives' );
 require("mocha-jshint")();
 
@@ -154,6 +155,24 @@ describe('calcScore', function() {
           numberContributors: data.anonAuthors + data.uniqueAuthors
         }, 1.5);
       assert.ok( score > 1, example.title + ' has score of ' + score );
+    });
+  });
+
+  it( 'Check pushipedia false notifications match with low scores', function () {
+    negativePushipedia.forEach( function ( example ) {
+      var data = example.data;
+      var score = scorer.calculateScore(new Date(data.trendedAt),
+        {
+          edits: data.edits,
+          anonEdits: data.anonEdits,
+          start: data.start,
+          isNew: data.isNew,
+          reverts: data.reverts,
+          flaggedEdits: data.isVolatile ? 1 : 0,
+          distribution: data.distribution,
+          numberContributors: data.anonAuthors + data.uniqueAuthors
+        }, 1.5);
+      assert.ok( score <= 0, example.title + ' has score of ' + score );
     });
   });
 });

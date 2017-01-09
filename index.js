@@ -91,7 +91,10 @@ function calculateScore(date, edits, hrs) {
       score = 0;
     }
   } else {
-    if ( age < 20 && ( allEdits < 10 || namedEdits === 0 ) && anonEdits > 5 ) {
+    if (
+      age < 20 && ( allEdits < 10 || namedEdits === 0 || namedEdits / anonEdits < 0.35 ) &&
+      ( anonEdits > 5 )
+    ) {
       score = 0;
     }
   }

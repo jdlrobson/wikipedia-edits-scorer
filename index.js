@@ -55,6 +55,7 @@ function calculateScore(date, edits, hrs) {
   var views = edits.views || 0;
   var flagged = edits.flaggedEdits || 0;
   var bytes = edits.bytesChanged;
+  var distribution = edits.distribution;
   // Maybe this should
   var numContributors = edits.numberContributors || 1;
 
@@ -66,10 +67,24 @@ function calculateScore(date, edits, hrs) {
   var contributionScore = ( numContributors - 3 ) / 2;
   var speed = allEdits / age;
 
+  var namedEditors = 0;
+  var anonEditors = 0;
+  Object.keys( distribution ).forEach( ( name ) => {
+    if ( name.indexOf( ':' ) > -1 || name.indexOf( '.' ) > -1 ) {
+      anonEditors++;
+    } else {
+      namedEditors++;
+    }
+  })
+  var ratioAnonsToNamed = namedEditors === 0 ? 0 : namedEditors / anonEditors;
+
   if ( views > 0 && hrs < 84 ) {
     visitScore = -visitScore;
   }
 
+  if ( reverts > 0 && ratioAnonsToNamed < 0.4 ) {
+    return 0;
+  }
   var score = contributionScore * ( visitScore + editScore ) * exponential;
   if ( bytes !== undefined ) {
     var byteScore = bytes / ( edits.edits / numContributors );
@@ -84,7 +99,7 @@ function calculateScore(date, edits, hrs) {
     }
   }
 
-  var bias = getBias(edits.distribution);
+  var bias = getBias( distribution );
   if ( edits.isNew ) {
     score *= allEdits / ( age / 30 );
     if ( speed > 0.9 && allEdits < 12 ) {
@@ -92,7 +107,7 @@ function calculateScore(date, edits, hrs) {
     }
   } else {
     if (
-      age < 20 && ( allEdits < 10 || namedEdits === 0 || namedEdits / anonEdits < 0.35 ) &&
+      age < 20 && ( allEdits < 10 || namedEdits === 0 || ratioAnonsToNamed < 0.35 ) &&
       ( anonEdits > 5 )
     ) {
       score = 0;

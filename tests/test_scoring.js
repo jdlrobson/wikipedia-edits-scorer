@@ -2,6 +2,8 @@ var assert = require( 'assert');
 
 const examples = require( './examples')
 const scorer = require( './../')
+const negatives = require( './negatives' );
+const positives = require( './positives' );
 const negativePushipedia = require( './pushipedia-negatives' );
 const postivePushipedia = require( './pushipedia-positives' );
 require("mocha-jshint")();
@@ -173,6 +175,40 @@ describe('calcScore', function() {
           numberContributors: data.anonAuthors + data.uniqueAuthors
         }, 1.5);
       assert.ok( score <= 0, example.title + ' has score of ' + score );
+    });
+  });
+
+  it( 'Check trending.wmflabs positives', function () {
+    positives.forEach( function ( data ) {
+      var score = scorer.calculateScore(new Date(data.trendedAt),
+        {
+          edits: data.edits,
+          anonEdits: data.anonEdits,
+          start: data.start,
+          isNew: data.isNew,
+          reverts: data.reverts,
+          flaggedEdits: data.volatileFlags,
+          distribution: data.distribution,
+          numberContributors: data.contributors.length + data.anons.length
+        }, 1.5);
+      assert.ok( score > 10, data.title + ' has score of ' + score );
+    });
+  });
+
+  it( 'Check trending.wmflabs false positives', function () {
+    negatives.forEach( function ( data ) {
+      var score = scorer.calculateScore(new Date(data.trendedAt),
+        {
+          edits: data.edits,
+          anonEdits: data.anonEdits,
+          start: data.start,
+          isNew: data.isNew,
+          reverts: data.reverts,
+          flaggedEdits: data.volatileFlags,
+          distribution: data.distribution,
+          numberContributors: data.contributors.length + data.anons.length
+        }, 1.5);
+      assert.ok( score < 5, data.title + ' has score of ' + score );
     });
   });
 });

@@ -23,6 +23,10 @@ describe('getBias', function() {
   it('pages edited by only one person are completely biased', function() {
     assert.ok( scorer.getBias( { a: 1 } ) === 1 );
   });
+
+  it('pages edited by only only anonymous users are completely biased', function() {
+    assert.ok( scorer.getBias( {} ) === 1 );
+  });
 });
 
 describe('calcScore', function() {

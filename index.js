@@ -19,7 +19,7 @@ function getBias( editors ) {
     totalEdits += value;
     avg += values[values.length - 1];
   } );
-  if ( values.length === 1 ) {
+  if ( values.length <= 1 ) {
     return 1;
   } else {
     avg = avg / values.length;

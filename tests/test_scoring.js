@@ -27,6 +27,23 @@ describe('getBias', function() {
   it('pages edited by only only anonymous users are completely biased', function() {
     assert.ok( scorer.getBias( {} ) === 1 );
   });
+
+  it('pages where three editors have done more work than 4 editors are bias', function() {
+    assert.ok( scorer.getBias( { a: 12, b: 4, c: 11, d: 7, e: 2, f: 1, g: 2 } ) > 0.5 );
+  });
+
+  it('pages where two editors have done majority of edits are bias', function() {
+    assert.ok( scorer.getBias( { a: 12, b: 2, c: 10, d: 2, e: 2 } ) > 0.5 );
+  });
+
+  it('pages where one editor has done double edits of 2nd editor are bias', function() {
+    assert.ok( scorer.getBias( { a: 29, b: 4, c: 2, d: 12, e: 4 } ) > 0.5 );
+  });
+
+  it('pages with lots of editors and one extreme editor are not bias', function() {
+    var bias = scorer.getBias( { "201":1,"685.":1,"Jen":2,"Sti":2,"Ade":6,"197":1,"Cor":5,"Law":21,"Biz":1,"186":1,"864.":1,"86.":2,"105":1,"Fel":5,"103":1,"Rob":1,"198":3,"35.":1,"82.":2,"189":2,"586.":1,"1905":1,"185":1,"Sas":11,"Col":3,"118":1,"Hap":3,"Ric":2,"81.":1,"Ano":82,"Pet":1,"Kin":1,"260":1,"205":1,"2A0":1,"79.":1,"Pjv":1,"179":1,"z190":2,"85.":1,"She":4,"Gof":1,"Dri":3,"190":1,"Ste":1,"Jus":2,"Jul":1,"169":2,"122":1,"2Z0":1,"Lor":1,"Doc":1,"Cre":3,"181":1,"2V0":1,"Qua":2,"Run":1,"Nos":2,"Zrs":1,"Lit":2,"Fer":1,"107":1,"s9.":1,"123":1,"Mel":1,"The":2,"Mag":1} );
+    assert.ok( bias < 0.5 );
+  });
 });
 
 describe('calcScore', function() {

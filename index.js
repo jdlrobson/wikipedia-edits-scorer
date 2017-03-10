@@ -7,6 +7,7 @@
  */
 function getBias( editors ) {
   var variance, sd,
+    maxSpread = 8,
     avg = 0,
     totalEdits = 0,
     values = [],
@@ -17,8 +18,20 @@ function getBias( editors ) {
     var value = editors[user];
     values.push(value);
     totalEdits += value;
-    avg += values[values.length - 1];
   } );
+
+  // when more than 10 editors ignore the extremes in bias calculation
+  // top editor for every 10.
+  if ( values.length > 10 ) {
+    values = values.sort( function ( val, val2 ) {
+      return val < val2 ? -1 : 1;
+    }).slice( 0, values.length - Math.floor( values.length / 10 ) );
+  }
+
+  values.forEach( function ( value ) {
+    avg += value;
+  } );
+
   if ( values.length <= 1 ) {
     return 1;
   } else {
@@ -31,7 +44,9 @@ function getBias( editors ) {
     // variance
     variance = totalDeviationSquared / values.length;
     sd = Math.sqrt( variance );
-    return sd / totalEdits;
+    // if a sd is higher than the maxSpread we will consider it biased
+    // otherwise how close is to this upper bound?
+    return Math.min( sd, maxSpread ) / maxSpread;
   }
 }
 /**

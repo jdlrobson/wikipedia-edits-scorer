@@ -44,11 +44,25 @@ describe('getBias', function() {
     var bias = scorer.getBias( { "201":1,"685.":1,"Jen":2,"Sti":2,"Ade":6,"197":1,"Cor":5,"Law":21,"Biz":1,"186":1,"864.":1,"86.":2,"105":1,"Fel":5,"103":1,"Rob":1,"198":3,"35.":1,"82.":2,"189":2,"586.":1,"1905":1,"185":1,"Sas":11,"Col":3,"118":1,"Hap":3,"Ric":2,"81.":1,"Ano":82,"Pet":1,"Kin":1,"260":1,"205":1,"2A0":1,"79.":1,"Pjv":1,"179":1,"z190":2,"85.":1,"She":4,"Gof":1,"Dri":3,"190":1,"Ste":1,"Jus":2,"Jul":1,"169":2,"122":1,"2Z0":1,"Lor":1,"Doc":1,"Cre":3,"181":1,"2V0":1,"Qua":2,"Run":1,"Nos":2,"Zrs":1,"Lit":2,"Fer":1,"107":1,"s9.":1,"123":1,"Mel":1,"The":2,"Mag":1} );
     assert.ok( bias < 0.5 );
   });
+
+  it('pages with lots of editors and one extreme editor are not bias', function() {
+    var bias = scorer.getBias( { "201":1,"685.":1,"Jen":2,"Sti":2,"Ade":6,"197":1,"Cor":5,"Law":21,"Biz":1,"186":1,"864.":1,"86.":2,"105":1,"Fel":5,"103":1,"Rob":1,"198":3,"35.":1,"82.":2,"189":2,"586.":1,"1905":1,"185":1,"Sas":11,"Col":3,"118":1,"Hap":3,"Ric":2,"81.":1,"Ano":82,"Pet":1,"Kin":1,"260":1,"205":1,"2A0":1,"79.":1,"Pjv":1,"179":1,"z190":2,"85.":1,"She":4,"Gof":1,"Dri":3,"190":1,"Ste":1,"Jus":2,"Jul":1,"169":2,"122":1,"2Z0":1,"Lor":1,"Doc":1,"Cre":3,"181":1,"2V0":1,"Qua":2,"Run":1,"Nos":2,"Zrs":1,"Lit":2,"Fer":1,"107":1,"s9.":1,"123":1,"Mel":1,"The":2,"Mag":1} );
+    assert.ok( bias < 0.5 );
+  });
+
+  it('pages with low number of edits editors and extreme editors are biased', function() {
+    assert.ok( scorer.getBias( { a: 12, b: 2, c: 10, d: 2, e: 2 } ) > 0.5 );
+    assert.ok( scorer.getBias( { a: 29, b: 4, c: 2, d: 12, e: 4 } ) > 0.5 );
+  });
 });
 
 describe('calcScore', function() {
   it('page 1 is hotter than page 2 with half life 2 (more recent, less anon edits and reverts)', function() {
     assert.ok( calcScore(examples.page2, 2) < calcScore(examples.page, 2));
+  });
+
+  it('ColinDexter is hotter than ConferenceParis', function() {
+    assert.ok( calcScore(examples.ConferenceParis, 1.5) < calcScore(examples.ColinDexter, 1.5));
   });
 
   it('page 2 is hotter than page 1 with half life 10 (more recent, less anon edits and reverts)', function() {
@@ -78,6 +92,10 @@ describe('calcScore', function() {
   it('bias of 0 doesnt give infinite score', function() {
     assert.ok( scorer.getBias(examples.DearZindagi.distribution) === 0, 'Bias of example is zero' )
     assert.ok( isFinite(calcScore(examples.DearZindagi, 12)), 'But score is finite' );
+  });
+
+  it('DavidHamilton has more edits and bytes changed', function() {
+    assert.ok( calcScore(examples.MartellusBennett, 12) < 5, "MartellusBennett is being vandalised.");
   });
 
   it('DavidHamilton has more edits and bytes changed', function() {

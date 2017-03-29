@@ -93,6 +93,10 @@ function calculateScore(date, edits, hrs) {
   })
   var ratioAnonsToNamed = namedEditors === 0 ? 0 : namedEditors / anonEditors;
 
+  if ( namedEditors < 2 ) {
+    return -2;
+  }
+
   if ( views > 0 && hrs < 84 ) {
     visitScore = -visitScore;
   }

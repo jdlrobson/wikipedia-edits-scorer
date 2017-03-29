@@ -23,6 +23,10 @@ var minimal = {
   distribution: { a: 5, b: 5 }
 };
 
+const oneEditor = new Page({"title":"One editor","edits":100,"anonEdits":0,"isNew":false,"notabilityFlags":0,"volatileFlags":0,"reverts":0,"start":"2016-12-07T15:20:22.190Z","updated":"2016-12-07T16:38:19.429Z","contributors":["A"],"anons":[],"distribution":{"A":100},"bytesChanged":4631, "wiki":"enwiki","views":0,"lang":"en"});
+
+const multipleEditors = new Page({"title":"One editor","edits":10,"anonEdits":0,"isNew":false,"notabilityFlags":0,"volatileFlags":0,"reverts":0,"start":"2016-12-07T15:20:22.190Z","updated":"2016-12-07T16:38:19.429Z","contributors":["A", "B"],"anons":[],"distribution":{"A":8, "B": 2},"bytesChanged":4631, "wiki":"enwiki","views":0,"lang":"en"});
+
 var EmployeeScheduling = new Page({"title":"Employee scheduling software","edits":15,"anonEdits":0,"isNew":false,"notabilityFlags":0,"volatileFlags":0,"reverts":0,"start":"2016-12-07T15:14:23.703Z","updated":"2016-12-07T15:54:19.745Z","contributors":["Tstamp2","Haydenjones93","Trevorcallarman"],"anons":[],"distribution":{"Tstamp2":9,"Haydenjones93":4,"Trevorcallarman":2},"bytesChanged":5214,"id":"Employee scheduling software","wiki":"enwiki","views":0,"score":5908.627373243076,"lang":"en","bias":0.5777777777777777,"safe":true,"lastIndex":2,"index":2});
 
 var ArtificialKidney = new Page({"title":"Artificial kidney","edits":13,"anonEdits":0,"isNew":false,"notabilityFlags":0,"volatileFlags":0,"reverts":0,"start":"2016-12-07T15:20:22.190Z","updated":"2016-12-07T16:38:19.429Z","contributors":["Kuiperal","Abdowns","Rotenbe5"],"anons":[],"distribution":{"Kuiperal":4,"Abdowns":6,"Rotenbe5":3},"bytesChanged":4631,"id":"Artificial kidney","wiki":"enwiki","views":0,"score":6180.976798589297,"lang":"en","bias":0.11965811965811965,"safe":true,"lastIndex":1,"index":1,"thumbnail":{"source":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Kunstnier.JPG/90px-Kunstnier.JPG","width":90,"height":120,"title":"File:Kunstnier.JPG"}});
@@ -243,6 +247,8 @@ const ColinDexter = Page.fromJSON({"title":"Colin Dexter","edits":31,"anonEdits"
 const ConferenceParis = Page.fromJSON({"totalEdits":7,"editors":1,"trendiness":0,"isNew":false,"since":"2017-03-21T16:13:56.000Z","updated":"2017-03-21T16:18:15.000Z","title":"Conférence_du_barreau_de_Paris","extract":"The Conference du barreau de Paris is an association of french lawyers² founded in 1810 which brings together twelve young lawyers elected by their peers (following a three round oratory contest), working as a special task force on sensitive criminal cases.\nMany Secrétaires de la conférence have distinguished themselves in French culture and politics such as Members of the Académie française Members of the Government, Members of Parliament, Presidents of the French Republic (Jules Grévy, Raymond Poincaré, Alexandre Millerand). Many notable lawyers were Secrétaires de la Conférence and marked French judicial history. Among them Fernand Labori who defended Alfred Dreyfus and Jacques Vergès famous for having defended Klaus Barbie and Sadam Hussein.","lang":"en","dir":"ltr","timestamp":"2017-03-21T16:18:15Z","description":"special team of young lawyers dedicated to criminal defense","normalizedtitle":"Conférence du barreau de Paris", "distribution": { "A": 7 }, "anons": [], "contributors": [ 'A' ] });
 
 module.exports = {
+  oneEditor: oneEditor,
+  multipleEditors: multipleEditors,
   ConferenceParis: ConferenceParis,
   ColinDexter: ColinDexter,
   UpconvertingNano: UpconvertingNano,

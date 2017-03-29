@@ -61,6 +61,10 @@ describe('calcScore', function() {
     assert.ok( calcScore(examples.page2, 2) < calcScore(examples.page, 2));
   });
 
+  it('pages with 1 editor score lower than ones with multiple editors', function() {
+    assert.ok( calcScore(examples.oneEditor, 2) < calcScore(examples.multipleEditors, 2));
+  });
+
   it('ColinDexter is hotter than ConferenceParis', function() {
     assert.ok( calcScore(examples.ConferenceParis, 1.5) < calcScore(examples.ColinDexter, 1.5));
   });

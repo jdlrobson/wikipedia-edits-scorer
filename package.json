@@ -1,6 +1,6 @@
 {
   "name": "wikipedia-edits-scorer",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "scripts": {
     "test": "mocha tests/**"
   },

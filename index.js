@@ -103,6 +103,11 @@ function calculateScore(date, edits, hrs) {
 
   if ( reverts > 0 && ratioAnonsToNamed < 0.4 ) {
     return 0;
+  // where number of edits bytes changed is low
+    // or reverts to edit ratio is high
+    // return -1
+  } else if ( reverts > 1 && ( reverts / allEdits > 0.46 || bytes && allEdits < 20 && bytes < 1000 ) ) {
+    return -1;
   }
   var score = contributionScore * ( visitScore + editScore ) * exponential;
   if ( bytes !== undefined ) {

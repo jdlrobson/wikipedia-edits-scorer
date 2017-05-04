@@ -240,6 +240,7 @@ describe('calcScore', function() {
 
   it( 'Check trending.wmflabs false positives', function () {
     negatives.forEach( function ( data ) {
+      var expected = data._expected_max_score || 0;
       var score = scorer.calculateScore(new Date(data.trendedAt),
         {
           edits: data.edits,
@@ -247,11 +248,12 @@ describe('calcScore', function() {
           start: data.start,
           isNew: data.isNew,
           reverts: data.reverts,
+          bytesChanged: data.bytesChanged,
           flaggedEdits: data.volatileFlags,
           distribution: data.distribution,
           numberContributors: data.contributors.length + data.anons.length
         }, 1.5);
-      assert.ok( score < 5, data.title + ' has score of ' + score );
+      assert.ok( score < expected, data.title + ' has score of ' + score );
     });
   });
 });

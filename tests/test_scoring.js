@@ -70,7 +70,7 @@ describe('calcScore', function() {
   });
 
   it('page 2 is hotter than page 1 with half life 10 (more recent, less anon edits and reverts)', function() {
-    assert.ok( calcScore(examples.page2, 10) < calcScore(examples.page, 10));
+    assert.ok( calcScore(examples.page2, 10) > calcScore(examples.page, 10));
   });
 
   it('page 3 is hotter than page 4 (same edits but more contributors)', function() {
@@ -98,7 +98,7 @@ describe('calcScore', function() {
     assert.ok( isFinite(calcScore(examples.DearZindagi, 12)), 'But score is finite' );
   });
 
-  it('DavidHamilton has more edits and bytes changed', function() {
+  it('MartellusBennett is being vandalised', function() {
     assert.ok( calcScore(examples.MartellusBennett, 12) < 5, "MartellusBennett is being vandalised.");
   });
 
@@ -110,8 +110,9 @@ describe('calcScore', function() {
     assert.ok( calcScore(examples.PeteBurns2, 84) > 0);
   });
 
-  it('RashaanSalaam has a score over zero.', function() {
-    assert.ok( calcScore(examples.RashaanSalaam, 1) > 0);
+  it('RashaanSalaam has a score below zero.', function() {
+    assert.ok( calcScore(examples.RashaanSalaam, 1) < 0,
+      'Although he died on the day of the trend. The edits were too minor for this to be trending.');
   });
 
   it('Women (BBC) has a score over zero despite one prolific editor.', function() {
@@ -168,6 +169,11 @@ describe('calcScore', function() {
   it('RussianOlympics is trending more than Anthropology', function() {
     assert.ok( calcScore(examples.RussianOlympics, 12) > calcScore(examples.Anthropology, 12),
       'RussianOlympics has more editors. Bytes dont matter so much.');
+  });
+
+  it('WinterOlympics is trending more than Anthropology', function() {
+    assert.ok( calcScore(examples.WinterOlympics, 12) > calcScore(examples.Anthropology, 12),
+      'WinterOlympics has more editors. Bytes dont matter so much.');
   });
 
   it('Joshua Bonehill-Paine is trending more than Artificial Kidney', function() {

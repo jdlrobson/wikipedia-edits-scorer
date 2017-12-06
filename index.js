@@ -115,9 +115,11 @@ function calculateScore(date, edits, hrs) {
     if (byteScore < 0) {
       byteScore = 1;
     } else {
-      byteScore /= 5000;
+      byteScore /= 10000;
     }
-    score *= byteScore;
+    if ( bytes < 200 && bytes > -200 ) {
+      return -1;
+    }
     if ( bytes === 0 ) {
       return -1;
     }
@@ -125,7 +127,7 @@ function calculateScore(date, edits, hrs) {
 
   var bias = getBias( distribution );
   if ( edits.isNew ) {
-    score *= allEdits / ( age / 30 );
+    score *= ( allEdits * 2 ) / ( age / 30 );
     if ( speed > 0.9 && allEdits < 12 ) {
       score = 0;
     }

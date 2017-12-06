@@ -250,7 +250,10 @@ const Anthropology = Page.fromJSON({"title":"History of anthropology by country"
 
 const RussianOlympics = Page.fromJSON({"title":"Olympic Athletes from Russia at the 2018 Winter Olympics","edits":67,"anonEdits":0,"isNew":false,"notabilityFlags":0,"volatileFlags":0,"reverts":0,"start":"2017-12-05T18:46:16.650Z","updated":"2017-12-05T22:52:02.164Z","contributors":["Sportsfan 1234","Cskamoscow100","Drmies","Primefac","Samsara","Jacob.m.s.morris","SarekOfVulcan","Heroeswithmetaphors","SrpskiAnonimac","Brandmeister","Muboshgu","The Wicked Twisted Road","Qwerty786","ViperSnake151","JoshDonaldson20"],"anons":[],"distribution":{"Sportsfan 1234":6,"Cskamoscow100":24,"Drmies":1,"Primefac":5,"Samsara":1,"Jacob.m.s.morris":2,"SarekOfVulcan":3,"Heroeswithmetaphors":1,"SrpskiAnonimac":2,"Brandmeister":3,"Muboshgu":1,"The Wicked Twisted Road":7,"Qwerty786":7,"ViperSnake151":2,"JoshDonaldson20":2},"bytesChanged":-6337,"id":"Olympic Athletes from Russia at the 2018 Winter Olympics","wiki":"enwiki","safe":true,"views":0,"score":194.29742594781197,"lang":"en","bias":0.26919309699430954,"lastIndex":51,"index":1});
 
+const WinterOlympics = Page.fromJSON({"title":"2018 Winter Olympics","edits":33,"anonEdits":0,"isNew":false,"notabilityFlags":0,"volatileFlags":0,"reverts":4,"start":"2017-12-05T18:36:34.320Z","updated":"2017-12-05T22:23:47.681Z","contributors":["David Biddulph","Sportsfan 1234","Cskamoscow100","JMyrleFuller","Smartyllama","Primefac","18abruce","ViperSnake151"],"anons":[],"distribution":{"David Biddulph":6,"Sportsfan 1234":7,"Cskamoscow100":10,"JMyrleFuller":1,"Smartyllama":1,"Primefac":1,"18abruce":1,"ViperSnake151":10},"bytesChanged":1360,"id":"2018 Winter Olympics","wiki":"enwiki","safe":true,"views":0,"score":1.7236429454643833,"lang":"en","bias":0.47981726664950275,"lastIndex":51,"index":1});
+
 module.exports = {
+  WinterOlympics: WinterOlympics,
   RussianOlympics: RussianOlympics,
   Anthropology: Anthropology,
   oneEditor: oneEditor,

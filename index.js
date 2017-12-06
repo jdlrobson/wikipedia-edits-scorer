@@ -115,7 +115,7 @@ function calculateScore(date, edits, hrs) {
     if (byteScore < 0) {
       byteScore = 1;
     } else {
-      byteScore /= 1200;
+      byteScore /= 5000;
     }
     score *= byteScore;
     if ( bytes === 0 ) {

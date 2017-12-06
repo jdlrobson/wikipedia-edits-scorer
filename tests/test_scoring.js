@@ -165,6 +165,11 @@ describe('calcScore', function() {
     );
   });
 
+  it('RussianOlympics is trending more than Anthropology', function() {
+    assert.ok( calcScore(examples.RussianOlympics, 12) > calcScore(examples.Anthropology, 12),
+      'RussianOlympics has more editors. Bytes dont matter so much.');
+  });
+
   it('Joshua Bonehill-Paine is trending more than Artificial Kidney', function() {
     assert.ok( calcScore(examples.JoshuaBonehillPaine, 1.5) > calcScore(examples.ArtificialKidney, 1.5),
       'Joshua Bonehill-Paine has more editors');
